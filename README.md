@@ -38,26 +38,11 @@ Containers are runtime instances of Docker images. They are isolated, portable, 
   docker run -it ubuntu bash
   ```
 
-
-## 🌐 Docker Hub
-
-[Docker Hub](https://hub.docker.com/) is a cloud-based registry for Docker images. You can:
-
-1. Pull pre-built images for various applications.
-2. Push your custom-built images for sharing or personal use.
-
-- **Example Command**:
-  ```bash
-  docker login
-  docker push <your-username>/<your-image-name>
-  ```
-
-
-## 🕸️ Docker Networks
+### 3. **Docker Networks**
 
 Docker Networking allows containers to communicate with each other, the host system, or external networks.
 
-### Types of Networks:
+#### Types of Networks:
 - **Bridge**: Default network for containers. Suitable for standalone setups.
 - **Host**: Shares the host system's network stack.
 - **Overlay**: For multi-host communication in Swarm mode.
@@ -101,7 +86,6 @@ services:
 ## 📚 Resources
 
 - [Docker Documentation](https://docs.docker.com/)
-- [Docker Hub](https://hub.docker.com/)
 - [Docker Cheatsheet](https://dockerlabs.collabnix.com/docker/cheatsheet/)
 
 
