@@ -28,7 +28,7 @@ This project is based on this [youtube course](https://www.youtube.com/watch?v=q
 
 ## Prerequisites
 
-- Docker and Docker Compose installed on your machine.
+- Docker installed on your machine.
 
 ## How to Run the Project
 
@@ -36,7 +36,7 @@ This project is based on this [youtube course](https://www.youtube.com/watch?v=q
 
 Use Docker Compose to build and start the services:
 ```bash
-docker-compose up --build
+docker compose up --build
 ```
 
 This will:
