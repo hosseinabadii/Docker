@@ -1,0 +1,4 @@
+fastapi==0.115.5
+uvicorn[standard]
+loguru==0.7.2
+sqlmodel==0.0.22

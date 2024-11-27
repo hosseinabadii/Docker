@@ -1,0 +1,10 @@
+version: "3.9"
+
+services:
+  fastapi:
+    build: .
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./src:/app/src
+      - ./db_instance:/app/db_instance
