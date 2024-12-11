@@ -1,30 +1,25 @@
-import React, { useContext } from "react";
-import { AuthContext } from "../contexts/AuthContext.jsx";
+import { useAuthContext } from "../contexts/AuthContext";
 
 const UserProfile = () => {
-  const { user, logout } = useContext(AuthContext);
-
-  if (!user) {
-    return (
-      <div className="max-w-md mx-auto mt-10 p-10 font-bold bg-white rounded-xl shadow-md md:max-w-2xl">
-        <h2 className="text-xl leading-6 font-medium text-gray-900 mb-5">
-          You have to be logged in to view this page
-        </h2>
-      </div>
-    );
-  }
+  const { user } = useAuthContext();
 
   return (
-    <div className="max-w-md mx-auto mt-10 p-10 font-bold text-2xl bg-white rounded-xl shadow-md md:max-w-2xl">
-      <h2 className="text-3xl mb-4 font-semibold text-gray-900 border-b-2 pb-2">
-        User Profile
+    <div className="w-5/6 sm:w-1/2 mx-auto bg-slate-50 p-8 rounded-lg shadow-md">
+      <h2 className="text-2xl font-bold border-b-2 border-gray-300 mb-4">
+        Your Profile
       </h2>
-      <p className="">
-        Username: <span className="text-gray-600">{user.username}</span>
-      </p>
-      <p className="">
-        Email: <span className="text-gray-600">{user.email}</span>
-      </p>
+      {user ? (
+        <div>
+          <p className="font-bold">
+            Username: <span className="text-gray-500">{user.username}</span>
+          </p>
+          <p className="font-bold">
+            Email: <span className="text-gray-500">{user.email}</span>
+          </p>
+        </div>
+      ) : (
+        <p>You have to login to see this page.</p>
+      )}
     </div>
   );
 };

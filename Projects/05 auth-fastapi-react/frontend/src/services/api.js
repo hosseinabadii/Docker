@@ -1,47 +1,52 @@
 import axios from "axios";
 
-const API_URL = "http://localhost:8000";
+const api = axios.create({ baseURL: "http://localhost:8000" });
 
-const loginUser = async (credentials) => {
-  try {
-    const params = new URLSearchParams();
-    for (const key in credentials) {
-      params.append(key, credentials[key]);
-    }
+const registerUser = async (userData) => {
+  const response = await api
+    .post("/auth/register", userData, {
+      headers: {
+        "Content-Type": "application/json",
+      },
+    })
+    .catch((error) => {
+      console.error("Registration failed:", error);
+      alert(error.response?.data?.detail || "Something went wrong!");
+    });
 
-    const response = await axios.post(`${API_URL}/auth/token`, params, {
+  return response.data;
+};
+
+const loginUser = async (username, password) => {
+  const credentials = { username, password };
+
+  const response = await api
+    .post("/auth/token", credentials, {
       headers: {
         "Content-Type": "application/x-www-form-urlencoded",
       },
+    })
+    .catch((error) => {
+      console.error("Login failed:", error);
+      alert(error.response?.data?.detail || "Something went wrong!");
     });
-    return response.data;
-  } catch (error) {
-    console.error("Login error:", error);
-    throw error;
-  }
+
+  return response.data;
 };
 
-const registerUser = async (userData) => {
-  try {
-    await axios.post(`${API_URL}/auth/register`, userData);
-  } catch (error) {
-    console.error("Registration error:", error);
-    throw error;
-  }
-};
-
-const fetchUserProfile = async (token) => {
-  try {
-    const response = await axios.get(`${API_URL}/users/me/`, {
+const fetchCurrentUser = async (accessToken) => {
+  const response = await api
+    .get("/users/me/", {
       headers: {
-        Authorization: `Bearer ${token}`,
+        Authorization: `Bearer ${accessToken}`,
       },
+    })
+    .catch((error) => {
+      console.error("Registration failed:", error);
+      alert(error.response?.data?.detail || "Something went wrong!");
     });
-    return response.data;
-  } catch (error) {
-    console.error("Fetch user profile error:", error);
-    throw error;
-  }
+
+  return response.data;
 };
 
-export { loginUser, registerUser, fetchUserProfile };
+export { registerUser, loginUser, fetchCurrentUser };

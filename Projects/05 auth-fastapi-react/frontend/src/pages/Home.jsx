@@ -1,22 +1,15 @@
-import React, { useContext } from "react";
-import { AuthContext } from "../contexts/AuthContext.jsx";
+import { useAuthContext } from "../contexts/AuthContext";
 
 const Home = () => {
-  const { user, logout } = useContext(AuthContext);
+  const { user } = useAuthContext();
+
   return (
-    <div className="max-w-md mx-auto mt-10 p-10 bg-white rounded-xl shadow-md md:max-w-2xl">
+    <div className="w-5/6 lg:w-full mx-auto bg-slate-50 p-8 rounded-lg shadow-md">
+      <h2 className="text-2xl font-bold mb-4">Welcome to our website</h2>
       {user ? (
-        <h1 className="text-3xl mb-4 font-semibold text-gray-900 border-b-2 pb-2">
-          Welcome back, {user.username}!
-        </h1>
+        <p> Hello {user.username}</p>
       ) : (
-        <>
-          <h1 className="text-3xl mb-4 font-semibold text-gray-900 border-b-2 pb-2">
-            Welcome to our website!
-          </h1>
-          <p>Please register to enjoy more features.</p>
-          <p>If you have an account, please log in to continue.</p>
-        </>
+        <p>If you have an account please login or register.</p>
       )}
     </div>
   );

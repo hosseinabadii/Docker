@@ -9,6 +9,7 @@ from ..auth.auth_handler import (
     create_access_token,
     get_password_hash,
     get_user,
+    get_user_by_email,
 )
 from ..database import SessionDep
 from ..models import User
@@ -22,6 +23,9 @@ def register_user(user: UserCreate, db: SessionDep):
     db_user = get_user(db, user.username)
     if db_user:
         raise HTTPException(status_code=400, detail="Username already registered")
+    db_user = get_user_by_email(db, user.email)
+    if db_user:
+        raise HTTPException(status_code=400, detail="Email already registered")
     hashed_password = get_password_hash(user.password)
     db_user = User(
         username=user.username, email=user.email, hashed_password=hashed_password

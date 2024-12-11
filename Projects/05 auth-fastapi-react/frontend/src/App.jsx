@@ -1,25 +1,28 @@
-import React from "react";
-import { Routes, Route } from "react-router-dom";
-import { AuthProvider } from "./contexts/AuthContext.jsx";
-import Navbar from "./components/Navbar.jsx";
-import Home from "./pages/Home.jsx";
-import Register from "./pages/Register.jsx";
-import Login from "./pages/Login.jsx";
-import UserProfile from "./pages/UserProfile.jsx";
+import { Route, Routes } from "react-router-dom";
+import Navbar from "./components/Navbar";
+import Home from "./pages/Home";
+import Login from "./pages/Login";
+import Register from "./pages/Register";
+import UserProfile from "./pages/UserProfile";
+import { AuthContextProvider } from "./contexts/AuthContext";
 
 const App = () => {
   return (
-    <div className="min-h-screen text-gray-800 bg-gray-100">
-      <AuthProvider>
-        <Navbar />
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/register" element={<Register />} />
-          <Route path="/login" element={<Login />} />
-          <Route path="/profile" element={<UserProfile />} />
-        </Routes>
-      </AuthProvider>
-    </div>
+    <AuthContextProvider>
+      <div className="min-h-screen bg-gray-100 text-gray-800">
+        <header className="bg-gray-900 text-white">
+          <Navbar />
+        </header>
+        <main className="max-w-4xl mx-auto text-lg pt-8">
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/profile" element={<UserProfile />} />
+            <Route path="/login" element={<Login />} />
+            <Route path="/register" element={<Register />} />
+          </Routes>
+        </main>
+      </div>
+    </AuthContextProvider>
   );
 };
 

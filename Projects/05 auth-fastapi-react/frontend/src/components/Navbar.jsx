@@ -1,11 +1,11 @@
-import React, { useContext } from "react";
 import { Link } from "react-router-dom";
-import { AuthContext } from "../contexts/AuthContext.jsx";
+import { useAuthContext } from "../contexts/AuthContext";
 
 const Navbar = () => {
-  const { user, logout } = useContext(AuthContext);
+  const { user, logout } = useAuthContext();
+
   return (
-    <nav className="max-w-3xl mx-auto flex items-center p-4 bg-gray-900 text-white justify-between h-16">
+    <nav className="flex justify-between items-center mx-10 max-w-4xl lg:mx-auto h-14 py-4">
       <ul className="flex space-x-4">
         <li>
           <Link to="/">Home</Link>
@@ -14,29 +14,21 @@ const Navbar = () => {
           <Link to="/profile">Profile</Link>
         </li>
       </ul>
-      <ul className="flex space-x-4 items-center">
-        {!user && (
+      <ul className="flex space-x-4">
+        {user ? (
           <li>
-            <Link to="/register">Register</Link>
+            <button onClick={logout}>Logout</button>
           </li>
+        ) : (
+          <>
+            <li>
+              <Link to="/login">Login</Link>
+            </li>
+            <li>
+              <Link to="/register">Register</Link>
+            </li>
+          </>
         )}
-        <li>
-          {user ? (
-            <button
-              onClick={logout}
-              className="bg-gray-800 text-white border-0 py-2 px-4 cursor-pointer rounded-md transition duration-200 ease-in-out"
-            >
-              Logout
-            </button>
-          ) : (
-            <Link
-              to="/login"
-              className="bg-gray-800 text-white border-0 py-2 px-4 cursor-pointer rounded-md transition duration-200 ease-in-out"
-            >
-              Login
-            </Link>
-          )}
-        </li>
       </ul>
     </nav>
   );
